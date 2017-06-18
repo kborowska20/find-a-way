@@ -48,8 +48,6 @@ class DijkstraAlgorithmTest {
         DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm(graph);
         dijkstraAlgorithm.execute(vertices.get(0));
         LinkedList<Vertex> path = dijkstraAlgorithm.getPath(vertices.get(2));
-
-        int sum = 0;
         LinkedList<Vertex> expectedPath = new LinkedList<>();
         expectedPath.add(vertex);
         expectedPath.add(vertex1);
