@@ -1,66 +1,36 @@
 package GrafClass;
 
-public class Edge implements Comparable<Edge> {
+public class Edge  {
+    private final String citys;
+    private final Vertex source;
+    private final Vertex destination;
+    private final int weight;
 
-    private Vertex one, two;
-    private int weight;
-
-    public Edge(Vertex one, Vertex two){
-        this(one, two, 1);
-    }
-
-
-    public Edge(Vertex one, Vertex two, int weight){
-        this.one = (one.getLabel().compareTo(two.getLabel()) <= 0) ? one : two;
-        this.two = (this.one == one) ? two : one;
+    public Edge(String citys, Vertex source, Vertex destination, int weight) {
+        this.citys = citys;
+        this.source = source;
+        this.destination = destination;
         this.weight = weight;
     }
 
-
-
-    public Vertex getNeighbor(Vertex current){
-        if(!(current.equals(one) || current.equals(two))){
-            return null;
-        }
-
-        return (current.equals(one)) ? two : one;
+    public String getCity() {
+        return citys;
     }
 
-    public Vertex getOne(){
-        return this.one;
+    public Vertex getDestination() {
+        return destination;
     }
 
-    public Vertex getTwo(){
-        return this.two;
+    public Vertex getSource() {
+        return source;
+    }
+    public int getWeight() {
+        return weight;
     }
 
-    public int getWeight(){
-        return this.weight;
+    @Override
+    public String toString() {
+        return source + " " + destination;
     }
 
-    public void setWeight(int weight){
-        this.weight = weight;
-    }
-
-    public int compareTo(Edge other){
-        return this.weight - other.weight;
-    }
-
-    public String toString(){
-        return "({" + one + ", " + two + "}, " + weight + ")";
-    }
-
-    public int hashCode(){
-        return (one.getLabel() + two.getLabel()).hashCode();
-    }
-
-    public boolean equals(Object other){
-        if(!(other instanceof Edge)){
-            return false;
-        }
-
-        Edge e = (Edge)other;
-
-        return e.one.equals(this.one) && e.two.equals(this.two);
-    }
 }

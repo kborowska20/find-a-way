@@ -1,70 +1,50 @@
 package GrafClass;
 
-import java.util.ArrayList;
-
-
 public class Vertex {
+    final private String city;
+    final private String name;
 
-    private ArrayList<Edge> neighborhood;
-    private String label;
 
-
-    public Vertex(String label){
-        this.label = label;
-        this.neighborhood = new ArrayList<Edge>();
+    public Vertex(String city, String name) {
+        this.city = city;
+        this.name = name;
+    }
+    public String getCity() {
+        return city;
     }
 
-    public void addNeighbor(Edge edge){
-        if(this.neighborhood.contains(edge)){
-            return;
-        }
-
-        this.neighborhood.add(edge);
+    public String getName() {
+        return name;
     }
 
-    public boolean containsNeighbor(Edge other){
-        return this.neighborhood.contains(other);
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((city == null) ? 0 : city.hashCode());
+        return result;
     }
 
-    public Edge getNeighbor(int index){
-        return this.neighborhood.get(index);
-    }
-
-    Edge removeNeighbor(int index){
-        return this.neighborhood.remove(index);
-    }
-
-    public void removeNeighbor(Edge e){
-        this.neighborhood.remove(e);
-    }
-
-    public int getNeighborCount(){
-        return this.neighborhood.size();
-    }
-
-    public String getLabel(){
-        return this.label;
-    }
-
-    public String toString(){
-        return "Vertex " + label;
-    }
-
-    public int hashCode(){
-        return this.label.hashCode();
-    }
-
-    public boolean equals(Object other){
-        if(!(other instanceof Vertex)){
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
             return false;
-        }
-
-        Vertex v = (Vertex)other;
-        return this.label.equals(v.label);
+        if (getClass() != obj.getClass())
+            return false;
+        Vertex other = (Vertex) obj;
+        if (city == null) {
+            if (other.city != null)
+                return false;
+        } else if (!city.equals(other.city))
+            return false;
+        return true;
     }
 
-    public ArrayList<Edge> getNeighbors(){
-        return new ArrayList<Edge>(this.neighborhood);
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

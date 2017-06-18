@@ -1,28 +1,55 @@
+import GrafClass.DijkstraAlgorithm;
 import GrafClass.Edge;
 import GrafClass.Graph;
 import GrafClass.Vertex;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        Graph graph = new Graph();
+        List<Vertex> vertices = new ArrayList<>();
+        List<Edge> edges = new ArrayList<>();
 
-        Vertex vertex = new Vertex("Warsaw");
-        Vertex vertex1 = new Vertex("London");
-        Vertex vertex2 = new Vertex("Athens");
-        Vertex vertex3 = new Vertex("Lisboa");
-        Vertex vertex4 = new Vertex("Paris");
+        Vertex vertex = new Vertex("Warsaw","Warsaw");
+        Vertex vertex1 = new Vertex("London","London");
+        Vertex vertex2 = new Vertex("Athens","Athens");
+        Vertex vertex3 = new Vertex("Lisboa","Lisboa");
+        Vertex vertex4 = new Vertex("Paris","Paris");
 
-        graph.addVertex(vertex, true);
-        graph.addVertex(vertex1, true);
-        graph.addVertex(vertex2, true);
-        graph.addVertex(vertex3, true);
-        graph.addVertex(vertex4, true);
+        Edge edge = new Edge("Warsaw - London",vertex,vertex1, 450);
+        Edge edge1 = new Edge("Warsaw - Paris",vertex,vertex4, 100);
+        Edge edge2 = new Edge("London - Lisboa",vertex1,vertex3, 250);
+        Edge edge3 = new Edge("London - Athens",vertex1,vertex2, 500);
+        Edge edge4 = new Edge("Athens - Lisboa",vertex2,vertex3, 800);
+        Edge edge5 = new Edge("Lisboa - Paris",vertex3,vertex4, 300);
 
+        vertices.add(vertex);
+        vertices.add(vertex1);
+        vertices.add(vertex2);
+        vertices.add(vertex3);
+        vertices.add(vertex4);
+
+        edges.add(edge);
+        edges.add(edge1);
+        edges.add(edge2);
+        edges.add(edge3);
+        edges.add(edge4);
+        edges.add(edge5);
+
+        Graph graph = new Graph(vertices,edges);
+        DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm(graph);
+        dijkstraAlgorithm.execute(vertices.get(0));
+        LinkedList<Vertex> path = dijkstraAlgorithm.getPath(vertices.get(3));
+
+        int sum = 0;
+
+        for (Vertex vertexes : path) {
+            System.out.println(vertexes);
+        }
 
     }
 }
